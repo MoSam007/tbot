@@ -10,13 +10,13 @@ const prisma = new PrismaClient();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Example route
 app.get("/", (req, res) => {
   res.send("Trading Bot API is running 🚀");
 });
 
-// Fetch all users
+// Fetch users
 app.get("/users", async (req, res) => {
   const users = await prisma.user.findMany();
   res.json(users);
