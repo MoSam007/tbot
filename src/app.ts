@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
+import userRoutes from "./modules/users/user.routes";
 
 dotenv.config();
 const app = express();
@@ -20,5 +21,7 @@ app.get("/users", async (req, res) => {
   const users = await prisma.user.findMany();
   res.json(users);
 });
+
+app.use("/users", userRoutes);
 
 export default app;
