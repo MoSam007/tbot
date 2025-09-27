@@ -33,3 +33,20 @@ export const listUsers = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Failed to fetch users" });
   }
 };
+
+export const loginUser = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: "email and password required" });
+    }
+
+    const { token, user } = await userService.loginUser(email, password);
+
+    const { password: _p, ...rest } = user as any;
+    res.json({ token, user: rest });
+  } catch (err: any) {
+    console.error(err);
+    res.status(401).json({ error: err.message || "Login failed" });
+  }
+};

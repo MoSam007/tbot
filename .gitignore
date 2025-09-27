@@ -65,3 +65,4 @@ build/
 prisma/dev.db
 prisma/migrations/
 /generated/prisma
+prisma/seed.ts`
